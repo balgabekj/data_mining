@@ -29,6 +29,4 @@ def calculate_sleep_quality(row):
 
 df['Calculated Sleep Quality'] = df.apply(calculate_sleep_quality, axis=1)
 
-# Вывод данных
-
 print(df)
