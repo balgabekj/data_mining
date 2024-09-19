@@ -6,15 +6,14 @@ df = pd.read_csv('Health_Sleep_Statistics.csv')
 
 scaler = MinMaxScaler()
 
-scaled_data = scaler.fit_transform(df[['Age', 'Sleep Quality', 'Daily Steps', 'Calories Burned']])
+scaled_data = scaler.fit_transform(df[['Sleep Quality']])
 
-# Convert scaled data back to a DataFrame
-df_scaled = pd.DataFrame(scaled_data, columns=['Age', 'Sleep Quality', 'Daily Steps', 'Calories Burned'])
+df_scaled = pd.DataFrame(scaled_data, columns=['Sleep Quality'])
 print('Scaled data: \n', df_scaled)
 
-df_encoded = pd.get_dummies(df, columns=['Physical Activity Level', 'Dietary Habits', 'Sleep Disorders', 'Medication Usage'], drop_first=True)
+df_encoded = pd.get_dummies(df, columns=[ 'Dietary Habits', 'Sleep Disorders', 'Medication Usage'], drop_first=True)
 
-print( 'Encoded data: \n', df_encoded.head())
+print('Encoded data: \n', df_encoded.head())
 
 
 df_new = df.copy()
