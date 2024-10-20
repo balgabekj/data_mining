@@ -1,15 +1,36 @@
+# Import necessary libraries
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
-from sklearn.datasets import load_boston
-from sklearn.model_selection import train_test_split
+from sklearn import tree
+import matplotlib.pyplot as plt
 
-# Train a decision tree regressor
-boston = load_boston()
-X_train, X_test, y_train, y_test = train_test_split(boston.data, boston.target, test_size=0.3, random_state=42)
+# Load the California Housing dataset
+housing = fetch_california_housing()
+X = housing.data
+y = housing.target
 
-tree_regressor = DecisionTreeRegressor(random_state=42)
-tree_regressor.fit(X_train, y_train)
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Evaluate the model
-y_pred_tree = tree_regressor.predict(X_test)
-print("Mean Squared Error:", mean_squared_error(y_test, y_pred_tree))
+# Create a Decision Tree Regressor
+regressor = DecisionTreeRegressor(random_state=42)
+
+# Train the model
+regressor.fit(X_train, y_train)
+
+# Make predictions on the testing set
+y_pred = regressor.predict(X_test)
+
+# Calculate Mean Squared Error (MSE)
+mse = mean_squared_error(y_test, y_pred)
+print(f"Mean Squared Error: {mse}")
+
+# Feature names for the California housing dataset
+feature_names = housing.feature_names  # Manually specify the feature names
+
+# Visualize the decision tree
+plt.figure(figsize=(20,10))
+tree.plot_tree(regressor, feature_names=feature_names, filled=True, rounded=True)
+plt.show()

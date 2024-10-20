@@ -11,9 +11,11 @@ X_train, X_test, y_train, y_test = train_test_split(wine.data, wine.target, test
 rf = RandomForestClassifier(random_state=42)
 rf.fit(X_train, y_train)
 
+# Extract feature importances
 importances = rf.feature_importances_
 indices = importances.argsort()[::-1]
 
+# Visualize the feature importances
 plt.figure(figsize=(10, 6))
 plt.title("Feature Importances")
 plt.bar(range(X_train.shape[1]), importances[indices], align="center")
