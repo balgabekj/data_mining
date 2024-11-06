@@ -13,3 +13,4 @@ print(df.isnull())
 
 print("\nData types of each column:")
 print(df.dtypes)
+
